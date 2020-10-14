@@ -256,7 +256,6 @@ function searchObject (objeto) {
         var objt = new THREE.Mesh(cilinderGeo, cilinderMat);
         return objt;
     }
-
 }
 
 // Create the maze walls using cubes that are mapped with a 2D array (Crie as paredes do labirinto usando cubos mapeados com uma matriz 2D)
