@@ -238,6 +238,27 @@ function addLights() {
     scene.add(lightOne);
 }
 
+function searchObject (objeto) {
+    if(objeto === "cubo"){
+        // Cubo
+        var cubeGeo = new THREE.BoxGeometry(UNITWIDTH, UNITHEIGHT, UNITWIDTH);
+        var cubeMat = new THREE.MeshPhongMaterial({
+            color: 0x81cfe0,
+        });
+        var objt = new THREE.Mesh(cubeGeo, cubeMat);
+        return objt;
+    } else if(objeto === "triangulo"){
+        //Piramide
+        var cilinderGeo = new THREE.CylinderGeometry( 1, 20, 20, 3 );
+        var cilinderMat = new THREE.MeshBasicMaterial({
+        color: 0xffff00
+        });
+        var objt = new THREE.Mesh(cilinderGeo, cilinderMat);
+        return objt;
+    }
+
+}
+
 // Create the maze walls using cubes that are mapped with a 2D array (Crie as paredes do labirinto usando cubos mapeados com uma matriz 2D)
 function createMazeCubes() {
     // Maze wall mapping, assuming matrix
@@ -245,34 +266,28 @@ function createMazeCubes() {
     var map = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,],
+        [0, 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, "cubo", 0, 0, 0, "triangulo", 0, 0, 0, 0, 0, 0, 0, 0, 0, "triangulo", 0, 0, 0, "cubo", 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, "cubo", 0, 0, 0, 0, 0, "cubo", 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "cubo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, "cubo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "cubo", 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "cubo", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
     ];
-
-    // wall details (Detalhes das paredes)
-    var cubeGeo = new THREE.BoxGeometry(UNITWIDTH, UNITHEIGHT, UNITWIDTH);
-    var cubeMat = new THREE.MeshPhongMaterial({
-        color: 0x81cfe0,
-    });
 
     // Keep cubes within boundry walls
     var widthOffset = UNITWIDTH / 2;
@@ -286,17 +301,17 @@ function createMazeCubes() {
     for (var i = 0; i < totalCubesWide; i++) {
         for (var j = 0; j < map[i].length; j++) {
             // If a 1 is found, add a cube at the corresponding position
-            if (map[i][j]) {
-                // Make the cube
-                var cube = new THREE.Mesh(cubeGeo, cubeMat);
+            if (map[i][j] !== 0) {
+                // Make the object
+                var objt = searchObject(String(map[i][j]));
                 // Set the cube position
-                cube.position.z = (i - totalCubesWide / 2) * UNITWIDTH + widthOffset;
-                cube.position.y = heightOffset;
-                cube.position.x = (j - totalCubesWide / 2) * UNITWIDTH + widthOffset;
+                objt.position.z = (i - totalCubesWide / 2) * UNITWIDTH + widthOffset;
+                objt.position.y = heightOffset;
+                objt.position.x = (j - totalCubesWide / 2) * UNITWIDTH + widthOffset;
                 // Add the cube
-                scene.add(cube);
+                scene.add(objt);
                 // Used later for collision detection
-                collidableObjects.push(cube);
+                collidableObjects.push(objt);
             }
         }
     }
